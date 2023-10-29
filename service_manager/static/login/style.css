@@ -1,0 +1,110 @@
+/* Estilo global para o body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Estilo para a div principal */
+.login-main {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Estilo para a div da esquerda */
+.login-left {
+    flex: 2;
+    background: #A3C7EB;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+
+}
+
+/* Estilo para a imagem de login */
+.login-image {
+    display: flex;
+    justify-content: center;
+}
+
+/* Estilo para a div da direita */
+.login-rigth {
+    flex: 1;
+    padding: 0 3rem;
+    background-color: #FFC73C;
+    align-self: center;
+    display: flex;
+    height: 100vh;
+}
+
+/* Estilo para o container direito */
+.container-right {
+    background: #fff;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+}
+
+/* Estilo para o logotipo da empresa */
+.container-logo {
+    width: 90px;
+    height: 90px;
+    background-color: aqua;
+    text-align: center;
+    align-self: center;
+    margin-top: -80px;
+    border-radius: 100%;
+    border: 5px solid #FFC73C;
+}
+
+.title-text {
+    background-color: #0B2D50;
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 100px;
+}
+
+/* Estilo para o formulário */
+.container-form {
+    text-align: -webkit-center;
+}
+
+/* Estilo para o título */
+
+
+/* Estilo para os campos de entrada */
+input.username,
+input.password {
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    width: 100%;
+
+}
+
+/* Estilo para o botão de login */
+.button-login {
+    width: 100%;
+    padding: 0.5rem;
+    background: #0B2D50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Estilo para o link "Esqueceu a senha?" (se houver) */
+a.forgot-password {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
