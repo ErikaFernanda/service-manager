@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link href="{% static 'login/style.css'%}" rel="stylesheet" />
+    <title>Service Manager</title>
+</head>
+
+<body>
+    <div class="login-main">
+        <div class="login-left">
+
+            <div class="login-image">
+                <img src="{% static 'login/img/login_background.svg' %}" alt="Uma ilustração de uma mulher trabalhando"
+                    style="width: 70%;">
+            </div>
+        </div>
+        <div class="login-rigth">
+            <div class="container-right">
+                <div class="container-logo"></div>
+                <div class="container-form">
+                    <div class="title-text">
+                        <h2>Nome da empresa</h2>
+                    </div>
+                    <form action="">
+
+                        <input class="username" placeholder="Email">
+                        <input class="password" placeholder="Password">
+                        <button class="button-login">LOGIN</button>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
