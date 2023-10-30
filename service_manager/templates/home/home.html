@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link href="{% static 'home/home.css'%}" rel="stylesheet" />
+    <link href="{% static 'home/sidebar.css'%}" rel="stylesheet" />
+    <link href="{% static 'listings/user_service_history.css'%}" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="main">
+        {% include "./sidebar.html" %}
+        <div class="main-content">
+            <div class="container-center">
+                <div class="container-title">
+                    <h1>Histórico de atendimento</h1>
+                    <button>Criar Atendimento</button>
+                </div>
+                <div class="main-info">
+                    {% include "../listings/user_service_history.html" %}
+                </div>
+
+
+            </div>
+            
+            
+            
+        </div>
+
+    </div>
+
+</body>
+
+</html>

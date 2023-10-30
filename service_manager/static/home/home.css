@@ -1,0 +1,22 @@
+.main{
+    display: flex
+}
+
+.main-content {
+    height: 100vh;
+    width: -webkit-fill-available;
+}
+.main-info{
+    display: flex;
+    justify-content: center;
+}
+.container-center{
+    display: flex;
+    flex-direction: column;
+    margin: 36px;
+}
+.container-title{
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+}
