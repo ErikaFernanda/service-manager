@@ -5,9 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <link href="{% static 'home/home.css'%}" rel="stylesheet" />
     <link href="{% static 'home/sidebar.css'%}" rel="stylesheet" />
     <link href="{% static 'listings/user_service_history.css'%}" rel="stylesheet" />
+    <link href="{% static 'registrations/customer_service_registration.css'%}" rel="stylesheet" />
+    <script src="{% static 'home/home.js' %}"></script>
+    <script src="{% static 'listings/user_service_history.js' %}"></script>
+    <script src="{% static 'registrations/registrations.js' %}"></script>
+
+
+
 </head>
 
 <body>
@@ -16,20 +24,17 @@
         <div class="main-content">
             <div class="container-center">
                 <div class="container-title">
-                    <h1>Histórico de atendimento</h1>
-                    <button>Criar Atendimento</button>
+                    <h1 id="title-home">Histórico de atendimento</h1>
+                    <button id="btn-create-customer-service">Criar Atendimento</button>
                 </div>
-                <div class="main-info">
+                <div class="main-info" id="main-info">
                     {% include "../listings/user_service_history.html" %}
                 </div>
-
-
+                <div class="main-info" id="main-info-list" style="display: none;">
+                    {% include "../registrations/customer_service_registration.html" %}
+                </div>
             </div>
-            
-            
-            
         </div>
-
     </div>
 
 </body>

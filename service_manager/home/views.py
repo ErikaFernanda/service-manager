@@ -21,6 +21,31 @@ from .serializers import (
     CustomerServiceServiceSerializer,
     StockServiceSerializer,
 )
+from django_filters.rest_framework import DjangoFilterBackend
+
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from io import BytesIO
+from django.http import HttpResponse
+
+def generate_pdf(request):
+    buffer = BytesIO()
+    pdf = canvas.Canvas(buffer, pagesize=letter)
+
+    pdf.drawString(100, 750, "Hello, this is a PDF with ReportLab!")
+    pdf.drawString(100, 730, "You can add text, shapes, images, etc.")
+
+    pdf.showPage()
+    pdf.save()
+
+    buffer.seek(0)
+    response = HttpResponse(buffer, content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="output.pdf"'
+    return response
+
+
 
 
 def home(request):
@@ -55,11 +80,14 @@ class StockListView(generics.ListCreateAPIView):
 class CustomerServiceListView(generics.ListCreateAPIView):
     queryset = Customer_Service.objects.all()
     serializer_class = CustomerServiceSerializer
-
+    filter_backends = [DjangoFilterBackend]  
+    filterset_fields = ['company']
 
 class CustomerServiceServiceListView(generics.ListCreateAPIView):
     queryset = CustomerService_Service.objects.all()
     serializer_class = CustomerServiceServiceSerializer
+    
+
 
 
 class StockServiceListView(generics.ListCreateAPIView):
