@@ -13,6 +13,7 @@
     <script src="{% static 'home/home.js' %}"></script>
     <script src="{% static 'listings/user_service_history.js' %}"></script>
     <script src="{% static 'registrations/registrations.js' %}"></script>
+    
 
 
 
@@ -26,6 +27,7 @@
                 <div class="container-title">
                     <h1 id="title-home">Histórico de atendimento</h1>
                     <button id="btn-create-customer-service">Criar Atendimento</button>
+                    <button id="gerarPDF" style="display: none;" type="button">Finalizar atendimento e Gerar PDF</button>
                 </div>
                 <div class="main-info" id="main-info">
                     {% include "../listings/user_service_history.html" %}

@@ -8,7 +8,7 @@ from .models import (
     Stock,
     Customer_Service,
     CustomerService_Service,
-    Stock_Service,
+    CustomerService_Stock,
 )
 
 
@@ -43,7 +43,11 @@ class StockSerializer(serializers.ModelSerializer):
 
 
 class CustomerServiceSerializer(serializers.ModelSerializer):
-    client = serializers.SerializerMethodField()
+    client = serializers.SerializerMethodField(read_only=True)
+    client_id =  serializers.PrimaryKeyRelatedField(
+        queryset=Client.objects.all(),
+        source="client",
+    )
 
     class Meta:
         model = Customer_Service
@@ -62,5 +66,5 @@ class CustomerServiceServiceSerializer(serializers.ModelSerializer):
 
 class StockServiceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Stock_Service
+        model = CustomerService_Stock
         fields = '__all__'

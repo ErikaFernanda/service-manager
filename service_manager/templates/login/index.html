@@ -24,8 +24,8 @@
                     <div class="title-text">
                         <h2>Nome da empresa</h2>
                     </div>
-                    <form action="">
-
+                    <form method="post">
+                        {% csrf_token %}
                         <input class="username" placeholder="Email">
                         <input class="password" placeholder="Password">
                         <button class="button-login">LOGIN</button>

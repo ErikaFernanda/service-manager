@@ -3,7 +3,33 @@
 
 window.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('gerarPDF').addEventListener('click', function () {
-        fetch('/generate_pdf')
+        var select_servicos = document.getElementById('servicos')
+        var servicos_selecionados = [];
+        for (var i = 0; i < select_servicos.options.length; i++) {
+            if (select_servicos.options[i].selected) {
+                servicos_selecionados.push(select_servicos.options[i].id);
+            }
+        }
+
+        var select_produtos = document.getElementById('estoque')
+        var produtos_selecionados = [];
+        for (var i = 0; i < select_produtos.options.length; i++) {
+            if (select_produtos.options[i].selected) {
+                produtos_selecionados.push(select_produtos.options[i].id);
+            }
+        }
+
+        var select_client = document.getElementById('cliente').value
+        dados_json = {"cliente":select_client, "servicos": servicos_selecionados,"produtos":produtos_selecionados}
+        console.log(dados_json)
+        fetch('/generate_pdf', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value,
+            },
+            body :  JSON.stringify(dados_json)
+        })
             .then(response => response.blob())
             .then(blob => {
                 const url = URL.createObjectURL(blob);
@@ -42,6 +68,7 @@ function carregarSelects() {
             data.forEach(item => {
                 const option = document.createElement('option');
                 option.textContent = item.title
+                option.id = item.id
                 select_service.appendChild(option);
             });
         })
@@ -58,6 +85,7 @@ function carregarSelects() {
             data.forEach(item => {
                 const option = document.createElement('option');
                 option.textContent = item.title
+                option.id = item.id
                 select_stock.appendChild(option);
             });
         })

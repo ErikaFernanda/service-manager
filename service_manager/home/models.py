@@ -38,6 +38,7 @@ class Service(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=200, blank=True, null=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    value = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return self.title
@@ -48,6 +49,7 @@ class Stock(models.Model):
     description = models.CharField(max_length=200)
     expiration_date = models.DateTimeField()
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    value = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return self.title
@@ -70,7 +72,7 @@ class CustomerService_Service(models.Model):
         return f"{self.service.title} - {self.service.company.name}"
 
 
-class Stock_Service(models.Model):
+class CustomerService_Stock(models.Model):
     customer_service = models.ForeignKey(
         Customer_Service, on_delete=models.CASCADE)
     stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
