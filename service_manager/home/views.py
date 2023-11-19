@@ -46,14 +46,6 @@ def generate_pdf(request):
         servicos_ids = chave_json.get('servicos', '')
         produtos_ids = chave_json.get('produtos', '')
         detalhes_servicos=Service.objects.filter(id__in=servicos_ids)
-
-        # # Detalhes dos produtos (assumindo uma lista de dicionários)
-        # detalhes_servicos = [
-        #     {'servico': 'Servico A', 'preco': 50.0},
-        #     {'servico': 'Servico B',  'preco': 30.0},
-        #     {'servico': 'Servico C', 'preco': 20.0},
-        # ]
-
         detalhes_produtos = Stock.objects.filter(id__in=produtos_ids)
         
 

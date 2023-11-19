@@ -20,15 +20,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
 
         var select_client = document.getElementById('cliente').value
-        dados_json = {"cliente":select_client, "servicos": servicos_selecionados,"produtos":produtos_selecionados}
-        console.log(dados_json)
+        dados_json = { "cliente": select_client, "servicos": servicos_selecionados, "produtos": produtos_selecionados }
+        fazerRequisicao(select_client, servicos_selecionados, produtos_selecionados);
         fetch('/generate_pdf', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value,
             },
-            body :  JSON.stringify(dados_json)
+            body: JSON.stringify(dados_json)
         })
             .then(response => response.blob())
             .then(blob => {
@@ -40,6 +40,89 @@ window.addEventListener('DOMContentLoaded', (event) => {
             });
     });
 })
+
+async function fazerRequisicao(select_client, servicos_selecionados, produtos_selecionados) {
+    // Dados que você deseja enviar no corpo da solicitação
+    const dadosParaEnviar = {
+        cliente: select_client,
+        servicos: servicos_selecionados,
+        produtos: produtos_selecionados,
+    };
+
+    // Configuração da requisição
+
+    // Faz a requisição
+    id_customer_service = null
+    await fetch('customer_service', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // Adicione outros cabeçalhos se necessário
+        },
+        body: JSON.stringify({
+            "company": 1,
+            "client_id": 2
+        }),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro de rede: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Faça algo com a resposta
+            id_customer_service = data.id
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+    await fetch('customer_service_service', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // Adicione outros cabeçalhos se necessário
+        },
+        body: JSON.stringify({
+            "customer_service": id_customer_service,
+            "service": servicos_selecionados[0]
+        }),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro de rede: ${response.status}`);
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+    await fetch('customer_service_stock', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // Adicione outros cabeçalhos se necessário
+        },
+        body: JSON.stringify({
+            "customer_service": id_customer_service,
+            "stock": produtos_selecionados[0]
+        }),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro de rede: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Faça algo com a resposta
+            id_customer_service = data.id
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+
+}
 
 function carregarSelects() {
     fetch('client')

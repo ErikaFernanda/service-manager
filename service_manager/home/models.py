@@ -76,6 +76,7 @@ class CustomerService_Stock(models.Model):
     customer_service = models.ForeignKey(
         Customer_Service, on_delete=models.CASCADE)
     stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.stock.title} - {self.service.company.name}"
