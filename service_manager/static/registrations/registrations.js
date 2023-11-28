@@ -42,22 +42,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
 })
 
 async function fazerRequisicao(select_client, servicos_selecionados, produtos_selecionados) {
-    // Dados que você deseja enviar no corpo da solicitação
     const dadosParaEnviar = {
         cliente: select_client,
         servicos: servicos_selecionados,
         produtos: produtos_selecionados,
     };
-
-    // Configuração da requisição
-
-    // Faz a requisição
     id_customer_service = null
     await fetch('customer_service', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            // Adicione outros cabeçalhos se necessário
         },
         body: JSON.stringify({
             "company": 1,
@@ -71,7 +65,6 @@ async function fazerRequisicao(select_client, servicos_selecionados, produtos_se
             return response.json();
         })
         .then(data => {
-            // Faça algo com a resposta
             id_customer_service = data.id
         })
         .catch(error => {
@@ -81,7 +74,6 @@ async function fazerRequisicao(select_client, servicos_selecionados, produtos_se
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            // Adicione outros cabeçalhos se necessário
         },
         body: JSON.stringify({
             "customer_service": id_customer_service,
@@ -101,7 +93,6 @@ async function fazerRequisicao(select_client, servicos_selecionados, produtos_se
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            // Adicione outros cabeçalhos se necessário
         },
         body: JSON.stringify({
             "customer_service": id_customer_service,

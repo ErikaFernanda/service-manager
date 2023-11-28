@@ -12,9 +12,8 @@
     <link href="{% static 'registrations/customer_service_registration.css'%}" rel="stylesheet" />
     <script src="{% static 'home/home.js' %}"></script>
     <script src="{% static 'listings/user_service_history.js' %}"></script>
+    <script src="{% static 'listings/client.js' %}"></script>
     <script src="{% static 'registrations/registrations.js' %}"></script>
-    
-
 
 
 </head>
@@ -24,16 +23,23 @@
         {% include "./sidebar.html" %}
         <div class="main-content">
             <div class="container-center">
-                <div class="container-title">
-                    <h1 id="title-home">Histórico de atendimento</h1>
-                    <button id="btn-create-customer-service">Criar Atendimento</button>
-                    <button id="gerarPDF" style="display: none;" type="button">Finalizar atendimento e Gerar PDF</button>
-                </div>
-                <div class="main-info" id="main-info">
+                <div class="main-info" id="main-list-service-history">
                     {% include "../listings/user_service_history.html" %}
                 </div>
-                <div class="main-info" id="main-info-list" style="display: none;">
+                <div class="main-info" id="main-list-service" style="display: none;">
+                    {% include "../listings/service.html" %}
+                </div>
+                <div class="main-info" id="main-list-client" style="display: none;">
+                    {% include "../listings/client.html" %}
+                </div>
+                <div class="main-info" id="main-registration-service-history" style="display: none;">
                     {% include "../registrations/customer_service_registration.html" %}
+                </div>
+                <div class="main-info" id="main-registration-service" style="display: none;">
+                    {% include "../registrations/service_registration.html" %}
+                </div>
+                <div class="main-info" id="main-registration-client" style="display: none;">
+                    {% include "../registrations/client_registration.html" %}
                 </div>
             </div>
         </div>

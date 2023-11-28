@@ -1,26 +1,38 @@
 
-window.onload = function() {
+window.onload = function () {
     // Função principal para carregar outras funções
     carregarSelects();
     buscarListadeAtendimentos();
 };
 
 window.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('btn-create-customer-service').addEventListener('click', function () {
+    document.getElementById('btn-list-customer-service-sb').addEventListener('click', function () {
+        var divs = document.querySelectorAll('.main-info');
+        for (var i = 0; i < divs.length; i++) {
+            divs[i].style.display = 'none';
+        }
+        document.getElementById('main-list-service-history').style.display = "block"
 
-        document.getElementById('title-home').innerHTML = "Cadastro de Atendimento"
-        document.getElementById('main-info-list').style.display="block"
-        document.getElementById('main-info').style.display="none"
-        document.getElementById('btn-create-customer-service').style.display="none"
-        document.getElementById('gerarPDF').style.display="block"
+    });
+    document.getElementById('btn-list-service-sb').addEventListener('click', function () {
+
+        var divs = document.querySelectorAll('.main-info');
+        for (var i = 0; i < divs.length; i++) {
+            divs[i].style.display = 'none';
+        }
+        document.getElementById('main-list-service').style.display = "block"
+        buscarListadeServicos()
     });
 
-    document.getElementById('btn-create-customer-service-sb').addEventListener('click', function () {
+    document.getElementById('btn-list-client-sb').addEventListener('click', function () {
 
-        document.getElementById('title-home').innerHTML = "Histórico de atendimento"
-        document.getElementById('main-info-list').style.display="none"
-        document.getElementById('main-info').style.display="block"
-        document.getElementById('btn-create-customer-service').style.display="block"
-        document.getElementById('gerarPDF').style.display="none"
+        var divs = document.querySelectorAll('.main-info');
+        for (var i = 0; i < divs.length; i++) {
+            divs[i].style.display = 'none';
+        }
+        document.getElementById('main-list-client').style.display = "block"
+        buscarListadeClientes()
     });
+
+
 });

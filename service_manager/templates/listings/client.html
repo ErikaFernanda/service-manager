@@ -1,0 +1,26 @@
+<div class="container-title">
+    <h1 id="title-home">Lista de clientes</h1>
+    <button id="btn-create-client">Criar cliente</button>
+</div>
+<table class="styled-table">
+    <thead>
+        <tr>
+
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Data de Cadastro</th>
+        </tr>
+    </thead>
+    <tbody id="table-client">
+    </tbody>
+</table>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        document.getElementById('btn-create-client').addEventListener('click', function () {
+            document.getElementById('main-list-client').style.display = "none"
+            document.getElementById('main-registration-client').style.display = "block"
+        });
+    });
+</script>

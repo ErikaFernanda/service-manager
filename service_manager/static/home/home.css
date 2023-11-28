@@ -9,6 +9,7 @@
 .main-info{
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 .container-center{
     display: flex;
@@ -20,6 +21,3 @@
     display: flex;
     justify-content: space-between;
 }
-/* #main-info-registration{
-    display: none; */
-/* } */

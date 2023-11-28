@@ -2,8 +2,7 @@ function buscarListadeAtendimentos() {
     fetch('customer_service')
         .then(response => response.json())
         .then(data => {
-            console.log("SWWWSWSW")
-            const tableBody = document.getElementById('tableBody');
+            const tableBody = document.getElementById('table-customer-service');
 
             tableBody.innerHTML = '';
 
@@ -29,6 +28,36 @@ function buscarListadeAtendimentos() {
 
                 actionsCell.appendChild(button);
                 row.appendChild(actionsCell);
+
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao buscar os dados da API:', error);
+        });
+}
+function buscarListadeServicos() {
+    fetch('service')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('table-service');
+            tableBody.innerHTML = '';
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+
+                const title = document.createElement('td');
+                title.textContent = item.title
+                row.appendChild(title);
+
+                const description = document.createElement('td');
+                description.textContent = item.description;
+                row.appendChild(description);
+
+                const value = document.createElement('td');
+                value.textContent = item.value;
+                row.appendChild(value);
+                
 
                 tableBody.appendChild(row);
             });

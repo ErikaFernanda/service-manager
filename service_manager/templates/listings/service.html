@@ -1,0 +1,24 @@
+<div class="container-title">
+    <h1 id="title-home">Lista de serviços</h1>
+    <button id="btn-create-service" >Criar serviço</button>
+</div>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+        </tr>
+    </thead>
+    <tbody id="table-service">
+    </tbody>
+</table>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        document.getElementById('btn-create-service').addEventListener('click', function () {
+            document.getElementById('main-list-service').style.display = "none"
+            document.getElementById('main-registration-service').style.display = "block"
+        });
+    });
+</script>

@@ -1,22 +1,22 @@
 from django.db import models
 
 
+class Company(models.Model):
+    name = models.CharField(max_length=100)
+    admin_representative = models.ForeignKey(
+        "home.User", on_delete=models.CASCADE, related_name='companies_represented',blank=True, null=True)
+    logo_url = models.URLField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
 class Client(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
     phone_number = models.CharField(max_length=20)
     cpf = models.CharField(max_length=14)
     created_at = models.DateTimeField(auto_now_add=True) 
-
-    def __str__(self):
-        return self.name
-
-
-class Company(models.Model):
-    name = models.CharField(max_length=100)
-    admin_representative = models.ForeignKey(
-        "home.User", on_delete=models.CASCADE, related_name='companies_represented',blank=True, null=True)
-    logo_url = models.URLField(max_length=200)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

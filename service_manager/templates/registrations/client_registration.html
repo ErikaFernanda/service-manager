@@ -1,0 +1,57 @@
+<div class="container-title">
+    <h1 id="title-home">Criar cliente</h1>
+    <button id="finalize-client-registration">Finalizar cadastro de cliente</button>
+</div>
+<div class="cadastro-cliente">
+    <form id="criarClienteForm" method="post" action="/client">
+        <label for="description">Nome:</label>
+        <input type="text" id="client-name" name="name" required>
+
+        <label for="title">Email:</label>
+        <input type="text" id="client-email" name="email" required>
+
+        <label for="value">Telefone:</label>
+        <input type="text" id="client-phone" name="phone" required>
+
+        <label for="value">CPF:</label>
+        <input type="text" id="client-cpf" name="cpf" required>
+    </form>
+</div>
+
+<script>
+    document.getElementById('finalize-client-registration').addEventListener('click', async function () {
+        name = document.getElementById('client-name').value
+        email = document.getElementById('client-email').value
+        phone = document.getElementById('client-phone').value
+        cpf = document.getElementById('client-cpf').value
+        var form = document.getElementById("criarClienteForm");
+        
+
+
+        await fetch('client', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "company": 1,
+                "name":name,
+                "email":email,
+                "phone_number":phone,
+                "cpf":cpf,
+            }),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro de rede: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                form.reset()
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+    });
+</script>

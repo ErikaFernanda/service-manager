@@ -78,7 +78,6 @@ WSGI_APPLICATION = 'service_manager_api.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-
 DATABASES = {
     'default': {
         'NAME': 'service_manager',
