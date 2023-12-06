@@ -4,6 +4,7 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta name='csrf-token' content='{% csrf_token %}' />
     <link href="{% static 'login/style.css'%}" rel="stylesheet" />
     <title>Service Manager</title>
 </head>
@@ -19,17 +20,19 @@
         </div>
         <div class="login-rigth">
             <div class="container-right">
-                <div class="container-logo"></div>
+                <div class="container-logo">
+                    <img src={{company.logo_url}} alt="Logo da Empresa" id="logo-login">
+
+                </div>
                 <div class="container-form">
                     <div class="title-text">
-                        <h2>Nome da empresa</h2>
+                        <h2>{{company.name}}</h2>
                     </div>
-                    <form method="post">
+                    <form method="post" action="{% url 'login' id_company=id_company %}">
                         {% csrf_token %}
-                        <input class="username" placeholder="Email">
-                        <input class="password" placeholder="Password">
-                        <button class="button-login">LOGIN</button>
-
+                        <input class="username" name="username" placeholder="Email">
+                        <input class="password" name="password" type="password" placeholder="Password">
+                        <button class="button-login" type="submit">LOGIN</button>
                     </form>
                 </div>
             </div>

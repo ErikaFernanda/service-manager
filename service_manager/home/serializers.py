@@ -3,7 +3,6 @@ from rest_framework.response import Response
 from .models import (
     Client,
     Company,
-    User,
     Service,
     Stock,
     Customer_Service,
@@ -24,10 +23,6 @@ class CompanySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = '__all__'
 
 
 class ServiceSerializer(serializers.ModelSerializer):

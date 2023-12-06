@@ -4,17 +4,16 @@ from rest_framework import generics
 from .models import (
     Client,
     Company,
-    User,
     Service,
     Stock,
     Customer_Service,
     CustomerService_Service,
     CustomerService_Stock,
+    Customer_Service_Note
 )
 from .serializers import (
     ClientSerializer,
     CompanySerializer,
-    UserSerializer,
     ServiceSerializer,
     StockSerializer,
     CustomerServiceSerializer,
@@ -31,15 +30,24 @@ from io import BytesIO
 from django.http import HttpResponse
 from datetime import datetime
 import json
+from django.contrib.auth.decorators import login_required
+from django.core.files.base import ContentFile
+from django.http import QueryDict
 
 def generate_pdf(request):
+    # print(request.body.decode('utf-8'))
+    # data = json.loads(request.body.decode('utf-8'))
+    # print(data)
+    # print(data.get("cliente"))
+    # print(data.get("servicos"))
+    # print(data.get("produtos"))
     numero_nota = '0000001'
 
     if request.method == 'POST':
         data_hora_formatada = datetime.now().strftime('%d/%m/%Y - %H:%M:%S')
         data_emissao = data_hora_formatada
         chave = list(request.POST.keys())[0]
-
+        print(chave)
         # Analise a chave como JSON
         chave_json = json.loads(chave)
         nome_cliente = chave_json.get('cliente', '')
@@ -98,46 +106,61 @@ def generate_pdf(request):
         response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = f'attachment; filename="nota_fiscal_{numero_nota}.pdf"'
         response.write(buffer.read())
-
+        buffer.seek(0)
+        pdf_temp = ContentFile(buffer.read())
+        pdf_temp.name = 'arquivo_temp.pdf'
+        Customer_Service_Note.objects.create(name="um nome2", file=pdf_temp)
         return response
     else:
         return HttpResponse("Método não permitido.", status=405)
 
-
+@login_required(login_url='login')
 def home(request):
     return render(request, 'home/home.html')
 
 
 class ClientListView(generics.ListCreateAPIView):
-    queryset = Client.objects.all()
     serializer_class = ClientSerializer
+    
+    def get_queryset(self):
+        queryset = self.serializer_class.Meta.model.objects.filter(company_id=self.request.session['company_id'])
+        return queryset
 
+    def create(self, request, *args, **kwargs):
+        company_id=request.session['company_id']
+        print(company_id)
+        return super().create(request, *args, **kwargs)
 
 class CompanyListView(generics.ListCreateAPIView):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
 
 
-class UserListView(generics.ListCreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
 class ServiceListView(generics.ListCreateAPIView):
-    queryset = Service.objects.all()
     serializer_class = ServiceSerializer
+
+    def get_queryset(self):
+        queryset = self.serializer_class.Meta.model.objects.filter(company_id=self.request.session['company_id'])
+        return queryset
+
 
 
 class StockListView(generics.ListCreateAPIView):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
 
+    def get_queryset(self):
+        queryset = self.serializer_class.Meta.model.objects.filter(company_id=self.request.session['company_id'])
+        return queryset
+
+
 
 class CustomerServiceListView(generics.ListCreateAPIView):
-    queryset = Customer_Service.objects.all()
     serializer_class = CustomerServiceSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['company']
+    def get_queryset(self):
+        queryset = self.serializer_class.Meta.model.objects.filter(company_id=self.request.session['company_id'])
+        return queryset
+
 
 
 class CustomerServiceServiceListView(generics.ListCreateAPIView):

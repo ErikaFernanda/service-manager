@@ -2,7 +2,6 @@ function buscarListadeClientes() {
     fetch('client')
         .then(response => response.json())
         .then(data => {
-            console.log("AAAAAAAAAAAAAAAaa")
             const tableBody = document.getElementById('table-client');
             tableBody.innerHTML = '';
 

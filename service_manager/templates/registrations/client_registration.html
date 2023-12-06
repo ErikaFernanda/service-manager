@@ -4,6 +4,7 @@
 </div>
 <div class="cadastro-cliente">
     <form id="criarClienteForm" method="post" action="/client">
+        {% csrf_token %}
         <label for="description">Nome:</label>
         <input type="text" id="client-name" name="name" required>
 
@@ -32,6 +33,7 @@
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value,
             },
             body: JSON.stringify({
                 "company": 1,

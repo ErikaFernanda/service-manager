@@ -19,7 +19,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         }
 
-        var select_client = document.getElementById('cliente').value
+        var select_client = document.getElementById('cliente').id
         dados_json = { "cliente": select_client, "servicos": servicos_selecionados, "produtos": produtos_selecionados }
         fazerRequisicao(select_client, servicos_selecionados, produtos_selecionados);
         fetch('/generate_pdf', {
@@ -52,6 +52,7 @@ async function fazerRequisicao(select_client, servicos_selecionados, produtos_se
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value,
         },
         body: JSON.stringify({
             "company": 1,
@@ -74,6 +75,7 @@ async function fazerRequisicao(select_client, servicos_selecionados, produtos_se
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value,
         },
         body: JSON.stringify({
             "customer_service": id_customer_service,
@@ -93,6 +95,7 @@ async function fazerRequisicao(select_client, servicos_selecionados, produtos_se
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value,
         },
         body: JSON.stringify({
             "customer_service": id_customer_service,
