@@ -59,7 +59,7 @@ class CustomerServiceServiceSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class StockServiceSerializer(serializers.ModelSerializer):
+class CustomerServiceStockSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomerService_Stock
         fields = '__all__'

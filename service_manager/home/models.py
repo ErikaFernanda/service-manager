@@ -2,15 +2,16 @@ from typing import Iterable, Optional
 from django.db import models
 
 
-
 class Company(models.Model):
     name = models.CharField(max_length=100)
     admin_representative = models.ForeignKey(
         "login.User", on_delete=models.CASCADE, related_name='companies_represented', blank=True, null=True)
     logo_url = models.URLField(max_length=200)
+    cnpj =  models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         return self.name
+
 
 class CompanyUser(models.Model):
     user = models.ForeignKey(
@@ -18,7 +19,8 @@ class CompanyUser(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.user.name+" "+self.company.name
+
 
 class Client(models.Model):
     name = models.CharField(max_length=100)
@@ -60,7 +62,6 @@ class Customer_Service(models.Model):
 
     def __str__(self):
         return f"{self.client} - {self.company}"
-
 
 class CustomerService_Service(models.Model):
     customer_service = models.ForeignKey(

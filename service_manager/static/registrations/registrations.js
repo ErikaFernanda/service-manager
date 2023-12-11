@@ -22,22 +22,22 @@ window.addEventListener('DOMContentLoaded', (event) => {
         var select_client = document.getElementById('cliente').id
         dados_json = { "cliente": select_client, "servicos": servicos_selecionados, "produtos": produtos_selecionados }
         fazerRequisicao(select_client, servicos_selecionados, produtos_selecionados);
-        fetch('/generate_pdf', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value,
-            },
-            body: JSON.stringify(dados_json)
-        })
-            .then(response => response.blob())
-            .then(blob => {
-                const url = URL.createObjectURL(blob);
-                const pdfWindow = window.open(url, '_blank');
-                if (!pdfWindow) {
-                    alert('O bloqueio de pop-ups está ativado. Por favor, desative para visualizar o PDF.');
-                }
-            });
+        // fetch('/generate_pdf', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/x-www-form-urlencoded',
+        //         'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value,
+        //     },
+        //     body: JSON.stringify(dados_json)
+        // })
+        //     .then(response => response.blob())
+        //     .then(blob => {
+        //         const url = URL.createObjectURL(blob);
+        //         const pdfWindow = window.open(url, '_blank');
+        //         if (!pdfWindow) {
+        //             alert('O bloqueio de pop-ups está ativado. Por favor, desative para visualizar o PDF.');
+        //         }
+        //     });
     });
 })
 
