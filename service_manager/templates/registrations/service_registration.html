@@ -1,0 +1,54 @@
+<div class="container-title" name="{{request.session.company_id}}">
+    <h1 id="title-home">Criar serviço</h1>
+    <button id="finalize-service-registration">Finalizar cadastro de serviço</button>
+</div>
+<div class="cadastro-atendimento">
+    <form id="criarServicoForm" method="post" action="/service" company_id="{{request.session.company_id}}">
+        {% csrf_token %}
+        <label for="description">Descrição:</label>
+        <input type="text" id="service-description" name="description" required>
+
+        <label for="title">Título:</label>
+        <input type="text" id="service-title" name="title" required>
+
+        <label for="value">Valor:</label>
+        <input type="number" id="service-value" name="value" step="0.01" required>
+        <h2>{{request.session.company_id}}</h2>
+    </form>
+</div>
+
+<script>
+    document.getElementById('finalize-service-registration').addEventListener('click', async function () {
+        decription = document.getElementById('service-description').value
+        title = document.getElementById('service-title').value
+        value = document.getElementById('service-value').value
+        var form = document.getElementById("criarServicoForm");
+        
+        console.log( document.getElementById("container-title"))
+        await fetch('service', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0],
+            },
+            body: JSON.stringify({
+                "company": form.value,
+                "description":decription,
+                "title":title,
+                "value":value
+            }),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro de rede: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                form.reset()
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+    });
+</script>

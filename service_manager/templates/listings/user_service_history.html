@@ -1,0 +1,24 @@
+<div class="container-title">
+    <h1 id="title-home">Histórico de atendimento</h1>
+    <button id="btn-create-customer-service">Criar Atendimento</button>
+</div>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>Nome</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody id="table-customer-service">
+    </tbody>
+</table>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        document.getElementById('btn-create-customer-service').addEventListener('click', function () {
+            document.getElementById('main-list-service-history').style.display = "none"
+            document.getElementById('main-registration-service-history').style.display = "block"
+        });
+    });
+</script>

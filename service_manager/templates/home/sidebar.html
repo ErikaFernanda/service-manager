@@ -1,0 +1,16 @@
+<div class="sidebar">
+    <div class="company-info">
+        <img src="{{request.session.company_logo_url}}" alt="Logo da Empresa">
+        <h2>{{request.session.company_name}}</h2>
+
+    </div>
+    <div class="sidebar-options">
+        <button id="btn-list-customer-service-sb">Ver Histórico de Atendimento</button>
+        <button id="btn-list-service-sb">Ver Listagem de Serviços</button>
+        <button id="btn-list-client-sb">Ver Listagem de Clientes</button>
+        <button>Ver Listagem de Estoque</button>
+    </div>
+
+    <!-- <a href="{% url 'logout' id_company=request.session.company_id %}">Sair</a> -->
+    <a href="{% url 'logout' id_company=1 %}">Sair</a> 
+</div>

@@ -1,0 +1,20 @@
+<div class="container-title">
+    <h1 id="title-home">Criar atendimento</h1>
+    <button id="gerarPDF" >Finalizar atendimento e Gerar PDF</button>
+</div>
+<div class="cadastro-atendimento">
+    <form id="atendimentoForm" method ="post" action="/customer_service">
+        {% csrf_token %}
+        <label for="cliente">Cliente:</label>
+        <select id="cliente" name="cliente">
+        </select>
+
+        <label for="servicos">Serviços:</label>
+        <select id="servicos" name="servicos" multiple>
+        </select>
+
+        <label for="estoque">Estoque:</label>
+        <select id="estoque" name="estoque" multiple>
+        </select>
+    </form>
+</div>

@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <link href="{% static 'home/home.css'%}" rel="stylesheet" />
+    <link href="{% static 'home/sidebar.css'%}" rel="stylesheet" />
+    <link href="{% static 'listings/user_service_history.css'%}" rel="stylesheet" />
+    <link href="{% static 'registrations/customer_service_registration.css'%}" rel="stylesheet" />
+    <script src="{% static 'home/home.js' %}"></script>
+    <script src="{% static 'listings/user_service_history.js' %}"></script>
+    <script src="{% static 'listings/client.js' %}"></script>
+    <script src="{% static 'registrations/registrations.js' %}"></script>
+
+
+</head>
+
+<body>
+    <div class="main">
+        {% include "./sidebar.html" %}
+        <div class="main-content">
+            <div class="container-center">
+                <div class="main-info" id="main-list-service-history">
+                    {% include "../listings/user_service_history.html" %}
+                </div>
+                <div class="main-info" id="main-list-service" style="display: none;">
+                    {% include "../listings/service.html" %}
+                </div>
+                <div class="main-info" id="main-list-client" style="display: none;">
+                    {% include "../listings/client.html" %}
+                </div>
+                <div class="main-info" id="main-registration-service-history" style="display: none;">
+                    {% include "../registrations/customer_service_registration.html" %}
+                </div>
+                <div class="main-info" id="main-registration-service" style="display: none;">
+                    {% include "../registrations/service_registration.html" %}
+                </div>
+                <div class="main-info" id="main-registration-client" style="display: none;">
+                    {% include "../registrations/client_registration.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

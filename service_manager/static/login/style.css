@@ -108,3 +108,7 @@ a.forgot-password {
     text-decoration: none;
     font-size: 0.9rem;
 }
+#logo-login{
+    width: inherit;
+    border-radius: inherit;
+}
